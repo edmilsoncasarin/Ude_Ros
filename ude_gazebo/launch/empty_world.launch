@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+<!-- These are the arguments you can pass this launch file, for example paused:=true -->    
+    <!-- define arguments -->
+    <arg name="rviz_mode" default="true"/>
+    <arg name="paused" default="true"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="debug" default="false" />
+    <arg name="verbose" default="true" />
+    <arg name="headless" default="false"/>
+    <arg name="recording" value="false"/>
+
+    <!-- startup simulated WORLD -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find ude_gazebo)/worlds/empty.world"/>
+        <arg name="paused" value="$(arg paused)" />
+        <arg name="use_sim_time" value="$(arg use_sim_time)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="recording" value="$(arg recording)"/>
+        <arg name="verbose" value="$(arg verbose)" />
+        <!--arg name="headless" value="$(arg headless)"/-->
+    </include>
+
+<!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description"
+        command="$(find xacro)/xacro --inorder '$(find ude_test_description)/urdf/ude_test.xacro' " />
+
+<!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="ude_spawn" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-unpause -urdf -model ude_test -param robot_description "/>
+
+    <include file="$(find ude_control)/launch/ude_control.launch" >
+    </include>
+    
+    <include file="$(find ude_test_moveit)/launch/ude_planning_execution.launch">
+        <arg name="rviz_mode" value="$(arg rviz_mode)"/>
+    </include>
+</launch>

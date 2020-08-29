@@ -1,0 +1,155 @@
+<?xml version="1.0" ?>
+<robot name="ude_test" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find ude_test_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find ude_test_description)/urdf/ude_test.trans" />
+<xacro:include filename="$(find ude_test_description)/urdf/ude_test.gazebo" />
+
+<link name="world">
+</link>
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="5.710007331408909e-12 -1.1644376128304597e-13 0.030568937878395663"/>
+    <mass value="1.1785035355525202"/>
+    <inertia ixx="0.002276" ixy="-0.0" ixz="-0.0" iyy="0.002276" iyz="-0.0" izz="0.002779"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="base_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.00554725663950478 0.000967644113690025 0.057553169706411264"/>
+    <mass value="0.7929685802085628"/>
+    <inertia ixx="0.002977" ixy="3e-06" ixz="-0.001299" iyy="0.004869" iyz="-5e-06" izz="0.005235"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.074675"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.074675"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="centro_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.08388027617634465 0.04573033642969338 0.0007305036097426942"/>
+    <mass value="0.40207170281895677"/>
+    <inertia ixx="0.000983" ixy="2.3e-05" ixz="-2.2e-05" iyy="0.00267" iyz="0.0" izz="0.003461"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.096621 0.044123 -0.202696"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/centro_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.096621 0.044123 -0.202696"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/centro_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="superior_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.05025376123182013 0.042250903270122424 0.0004383003960906906"/>
+    <mass value="0.2540286808120098"/>
+    <inertia ixx="0.000488" ixy="1.6e-05" ixz="-9e-06" iyy="0.001139" iyz="0.0" izz="0.001549"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.299807 0.040821 -0.204463"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/superior_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.299807 0.040821 -0.204463"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/superior_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="punho_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.00013370847016941356 0.049508248218208734 3.643798942826182e-06"/>
+    <mass value="0.16348109229873525"/>
+    <inertia ixx="8.2e-05" ixy="0.0" ixz="1e-06" iyy="4.2e-05" iyz="-0.0" izz="0.000105"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.452217 0.047838 -0.205789"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/punho_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.452217 0.047838 -0.205789"/>
+    <geometry>
+      <mesh filename="package://ude_test_description/meshes/punho_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="virtual_joint" type="fixed">
+  <parent link="world"/>
+  <child link="base_link"/>
+  <origin rpy="0 0 0" xyz="0 0 0"/>
+</joint>
+
+<joint name="joint1" type="revolute">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.074675"/>
+  <parent link="base_link"/>
+  <child link="base_1"/>
+  <axis xyz="-0.0 0.0 1.0"/>
+  <limit effort="100" lower="-1.570796" upper="1.570796" velocity="100"/>
+</joint>
+
+<joint name="joint2" type="revolute">
+  <origin rpy="0 0 0" xyz="0.096621 -0.044123 0.128021"/>
+  <parent link="base_1"/>
+  <child link="centro_1"/>
+  <axis xyz="-0.002271 0.999997 -0.0"/>
+  <limit effort="100" lower="-2.617994" upper="0.872665" velocity="100"/>
+</joint>
+
+<joint name="joint3" type="revolute">
+  <origin rpy="0 0 0" xyz="0.203186 0.003302 0.001767"/>
+  <parent link="centro_1"/>
+  <child link="superior_1"/>
+  <axis xyz="0.002271 -0.999997 -0.0"/>
+  <limit effort="100" lower="-2.530727" upper="0.0" velocity="100"/>
+</joint>
+
+<joint name="joint4" type="revolute">
+  <origin rpy="0 0 0" xyz="0.15241 -0.007017 0.001326"/>
+  <parent link="superior_1"/>
+  <child link="punho_1"/>
+  <axis xyz="-0.002271 0.999997 0.0"/>
+  <limit effort="100" lower="-2.879793" upper="-0.087266" velocity="100"/>
+</joint>
+<gazebo>
+  <static>false</static>
+</gazebo>
+</robot>

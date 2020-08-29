@@ -1,0 +1,38 @@
+<launch>
+
+  <!-- Load the SRDF and other configuration files -->
+  <include file="$(find ude_test_moveit)/launch/planning_context.launch"/>
+
+  <!-- The planning and execution components of MoveIt! configured to 
+   publish the current configuration of the robot (simulated or real) 
+   and the current state of the world as seen by the planner -->
+  <include file="$(find ude_test_moveit)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="info" value="true"/>
+  </include>
+
+  <!-- Generate/Load robot description file -->
+  <include file="$(find ude_control)/launch/ude_control.launch"/>
+
+  <!-- The visualization component of MoveIt! -->
+  <include file="$(find ude_test_moveit)/launch/moveit_rviz.launch"/>
+
+</launch>
+<!--launch-->
+
+  <!--Broadcast static tf for robot root-->
+  <!--node pkg="tf" type="static_transform_publisher" name="virtual_joint_broadcaster_1" args="0 0 0 0 0 0 map world 100"/-->
+
+  <!--Launch joint state publisher-->
+  <!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/-->
+
+  <!--The planning and execution components of MoveIt! configured to publish the current configuration of the robot (simulated or real) and the current state of the world as seen by the planner-->
+  <!--include file="$(find ude_test_moveit)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+  </include-->
+
+  <!--The visualization component of MoveIt!-->
+  <!--include file="$(find ude_test_moveit)/launch/moveit_rviz.launch"/-->
+
+<!--/launch-->
